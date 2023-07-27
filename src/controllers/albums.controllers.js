@@ -2,7 +2,7 @@ import {pool} from '../db.js';
 
 export const getAlbums = async(req, res) => {
     try{
-        const [rows] = await pool.query("SELECT * FROM album")
+        const [rows] = await pool.query("SELECT * FROM album WHERE eliminado = 0")
         res.json(rows)
     }catch(error){
         return res.status(500).json({
@@ -13,7 +13,7 @@ export const getAlbums = async(req, res) => {
 
 export const getAlbum = async(req, res) => {
     try{
-        const [rows] = await pool.query('SELECT * FROM album WHERE id = ? ',[req.params.id])
+        const [rows] = await pool.query('SELECT * FROM album WHERE id = ? AND eliminado = 0',[req.params.id] )
 
         if(rows.length <= 0) return res.status(404).json({message:'Album no encontrado'})
 
@@ -73,11 +73,18 @@ export const updateAlbums = async (req, res) => {
 };
 
 export const deleteAlbums = async(req, res) => {
+    //const [result] = await pool.query('DELETE FROM album WHERE id = ? ',[req.params.id])
+    const [result] = await pool.query(
+        'UPDATE album SET `eliminado` = 1 WHERE `id` = ? ',
+        [req.params.id]
+    )
+    if (result.affectedRows === 0) {
+        return res.status(404).json({message: 'Album no encontrado'})
+    }
+   //if (result.affectedRows <= 0) { return res.status(404).json({message:'Album no encontrado'})}
+    res.sendStatus(204)
     try{
-        const [result] = await pool.query('DELETE FROM album WHERE id = ? ',[req.params.id])
-
-        if (result.affectedRows <= 0) { return res.status(404).json({message:'Album no encontrado'})}
-        else{res.sendStatus(204)}
+        
     
     }catch(error){
         return res.status(500).json({
