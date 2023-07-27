@@ -1,7 +1,7 @@
 import  express  from 'express';
 import albumsRoutes from './routes/albums.routes.js'
 import indexRoutes from './routes/index.routes.js'
-import {PORT} from'./config.js'
+
 
 const app = express();
 
