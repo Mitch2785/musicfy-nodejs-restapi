@@ -29,19 +29,29 @@ export const getAlbum = async(req, res) => {
 export const createAlbums = async (req, res) => {
 
     try{
-        const { nombre, artista, year, imagen }  = req.body;
-        const [rows] = await pool.query (
-            'INSERT INTO album (`nombre`, `artista`, `year`, `imagen`) values(?, ? ,? ,?)',
-            [ nombre, artista, year, imagen]
-        )
+
         
-        res.send({
-            id: rows.insertId,
-            nombre,
-            artista,
-            year,
-            imagen
-        });
+        const [contador] = await pool.query("SELECT COUNT(*) AS cantidad FROM `album` WHERE `eliminado` = false;")
+        // res.json(contador[0].cantidad)
+
+        if(contador[0].cantidad < 20){
+            const { nombre, artista, year, imagen }  = req.body;
+            const [rows] = await pool.query (
+                'INSERT INTO album (`nombre`, `artista`, `year`, `imagen`) values(?, ? ,? ,?)',
+                [ nombre, artista, year, imagen]
+            )
+            
+            res.send({
+                id: rows.insertId,
+                nombre,
+                artista,
+                year,
+                imagen
+            });
+        }else{
+            return res.status(404).json({message: 'Límite de Albums alcanzado'})
+        }
+        
     }catch(error){
         return res.status(500).json({
             message: 'error al conectar'
@@ -91,9 +101,8 @@ export const deleteAlbums = async(req, res) => {
             message: 'error al conectar'
         })
     }
-   
-    
 };
+
 
 
  

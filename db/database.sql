@@ -8,7 +8,7 @@ CREATE TABLE album(
     `artista` VARCHAR(255) DEFAULT NULL,
     `year` INT(4) DEFAULT NULL,
     `imagen` VARCHAR(255) DEFAULT NULL,
-    `eliminado` BOOLEAN  DEFAULT false,
+    `eliminado` BOOLEAN DEFAULT false,
     PRIMARY KEY (`id`)
 );
 
@@ -16,3 +16,5 @@ CREATE TABLE album(
 INSERT INTO `album` (`nombre`, `artista`, `year`, `imagen`) VALUES
 ('A kind of magic', 'Queen', '2010', 'url_imagen'),
 ('Meteora', 'Linkin Park', '2011', 'url_imagen2');
+
+SELECT COUNT(*) AS cantidad FROM `album` WHERE `eliminado` = false;
