@@ -14,7 +14,7 @@ CREATE TABLE album(
 
 
 INSERT INTO `album` (`nombre`, `artista`, `year`, `imagen`) VALUES
-('A kind of magic', 'Queen', '2010', 'url_imagen'),
-('Meteora', 'Linkin Park', '2011', 'url_imagen2');
+('A kind of magic', 'Queen', '2010', 'https://upload.wikimedia.org/wikipedia/en/6/63/Queen_A_Kind_Of_Magic.png'),
+('Meteora', 'Linkin Park', '2011', 'https://www.rockaxis.com/img/newsList/3041215.jpg');
 
 SELECT COUNT(*) AS cantidad FROM `album` WHERE `eliminado` = false;

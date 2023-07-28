@@ -17,7 +17,7 @@ export const getAlbum = async(req, res) => {
 
         if(rows.length <= 0) return res.status(404).json({message:'Album no encontrado'})
 
-        res.json(rows[0])
+        return res.json(rows[0])
     }catch(error){
         return res.status(500).json({
             message: 'error al conectar'
@@ -92,7 +92,9 @@ export const deleteAlbums = async(req, res) => {
         return res.status(404).json({message: 'Album no encontrado'})
     }
    //if (result.affectedRows <= 0) { return res.status(404).json({message:'Album no encontrado'})}
-    res.sendStatus(204)
+    res.status(204).json({
+        message: 'El album se ha eliminado correctamente'
+    })
     try{
         
     
