@@ -1,0 +1,13 @@
+Pasos de ejecución del proyecto
+
+1.-Descargar del repositorio
+
+2.-Abrir una consola y ejecutar "npm install" para instalar las dependencias.
+
+3.-Ejecutar proyecto con el comando "npm run dev". se puede servisar en el browser con la direccion "http://localhost:3000/api/albums"
+
+
+el Backend se ejecuta en la dirección:
+https://musicfy-nodejs-restapi-production.up.railway.app/api/albums
+
+repositorio frontend: https://github.com/Mitch2785/musicfy-angular-front
